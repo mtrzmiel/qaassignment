@@ -3,13 +3,13 @@ package pl.trzmiel.qaassignment.entities;
 public class Article {
 
     private final String title;
-    private final String subTitle;
+    private final String summary;
     private final String context;
-    private final String tag;
+    private final String tag; // assumption, that only one tag is valid, but this should be consider
 
     private Article(ArticleBuilder articleBuilder) {
         this.title = articleBuilder.getTitle();
-        this.subTitle = articleBuilder.getSubTitle();
+        this.summary = articleBuilder.getSummary();
         this.context = articleBuilder.getContext();
         this.tag = articleBuilder.getTag();
     }
@@ -19,8 +19,8 @@ public class Article {
         return title;
     }
 
-    public String getSubTitle() {
-        return subTitle;
+    public String getSummary() {
+        return summary;
     }
 
     public String getContext() {
@@ -31,10 +31,10 @@ public class Article {
         return tag;
     }
 
-    public class ArticleBuilder {
+    public static class ArticleBuilder {
 
         private String title = "";
-        private String subTitle = "";
+        private String summary = "";
         private String context = "";
         private String tag = "";
 
@@ -42,32 +42,36 @@ public class Article {
             return title;
         }
 
-        public void setTitle(String title) {
+        public ArticleBuilder setTitle(String title) {
             this.title = title;
+            return this;
         }
 
-        String getSubTitle() {
-            return subTitle;
+        String getSummary() {
+            return summary;
         }
 
-        public void setSubTitle(String subTitle) {
-            this.subTitle = subTitle;
+        public ArticleBuilder setSummary(String summary) {
+            this.summary = summary;
+            return this;
         }
 
         String getContext() {
             return context;
         }
 
-        public void setContext(String context) {
+        public ArticleBuilder setContext(String context) {
             this.context = context;
+            return this;
         }
 
         String getTag() {
             return tag;
         }
 
-        public void setTag(String tag) {
+        public ArticleBuilder setTag(String tag) {
             this.tag = tag;
+            return this;
         }
 
         public Article build() {

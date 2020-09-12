@@ -3,7 +3,8 @@ package pl.trzmiel.qaassignment;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pl.trzmiel.qaassignment.pages.MainPage;
+import pl.trzmiel.qaassignment.entities.User;
+import pl.trzmiel.qaassignment.pages.TopBar;
 import pl.trzmiel.qaassignment.utilities.Configuration;
 import pl.trzmiel.qaassignment.utilities.ScreenShotHelper;
 import pl.trzmiel.qaassignment.utilities.SessionContext;
@@ -17,7 +18,6 @@ import static org.testng.ITestResult.FAILURE;
 public abstract class TestBase {
 
     protected SessionContext sessionContext;
-    protected MainPage mainPage;
 
     @BeforeSuite
     public void setupWebDriverManager() {
@@ -27,14 +27,13 @@ public abstract class TestBase {
     @BeforeClass
     public void setUp() {
         this.sessionContext = new SessionContext(WebDriverHelper.createDriver());
-        this.mainPage = goToMainPage();
+        this.goToMainPageFirstTime();
     }
 
-    private MainPage goToMainPage() {
+    private void goToMainPageFirstTime() {
         WebDriver driver = this.sessionContext.getDriver();
         driver.get(Configuration.getUrlWithAuthentication());
         driver.get(Configuration.getMainUrl());
-        return new MainPage(this.sessionContext);
     }
 
     @AfterMethod
@@ -68,5 +67,11 @@ public abstract class TestBase {
 
     protected void goToLink(String url) {
         this.sessionContext.getDriver().get(url);
+    }
+
+    protected void login(User user) {
+        new TopBar(this.sessionContext).clickSignIn()
+        .loginWithValidCredentials(user);
+
     }
 }

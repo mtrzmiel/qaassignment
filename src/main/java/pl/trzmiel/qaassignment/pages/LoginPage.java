@@ -3,6 +3,7 @@ package pl.trzmiel.qaassignment.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pl.trzmiel.qaassignment.entities.User;
 import pl.trzmiel.qaassignment.utilities.SessionContext;
 
 public class LoginPage {
@@ -21,9 +22,32 @@ public class LoginPage {
         seleniumActions = new SeleniumActions(sessionContext.getDriver());
     }
 
-
     public boolean isPageOpen() {
         return this.seleniumActions.isElementVisible(this.loginButton);
     }
+
+    private void typeUsername(String username) {
+        this.usernameInput.sendKeys(username);
+    }
+
+    private void typePassword(String password) {
+        this.passwordInput.sendKeys(password);
+    }
+
+    private void clickSubmitButton() {
+        try {
+            Thread.sleep(1000); // here should be something more sophisticated
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.loginButton.click();
+    }
+
+    public void loginWithValidCredentials(User user) {
+        this.typeUsername(user.getMail());
+        this.typePassword(user.getPassword());
+        this.clickSubmitButton();
+    }
+
 
 }

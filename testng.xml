@@ -5,4 +5,9 @@
             <class name="pl.trzmiel.qaassignment.NotLoggedInUserCannotCreateArticle"/>
         </classes>
     </test>
+    <test name="Test-1">
+        <classes>
+            <class name="pl.trzmiel.qaassignment.CreationOfArticle"/>
+        </classes>
+    </test>
 </suite>

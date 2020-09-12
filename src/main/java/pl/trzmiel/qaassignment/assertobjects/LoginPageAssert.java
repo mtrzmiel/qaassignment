@@ -13,7 +13,6 @@ public class LoginPageAssert {
         this.loginPage = loginPage;
     }
 
-
     public void pageIsOpened(){
         assertThat(this.loginPage.isPageOpen())
                 .as("Page is not opened")
