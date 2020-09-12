@@ -1,3 +1,8 @@
+Required programs, that need to be installed to run tests:
+Java 11,
+Maven,
+Chrome browser
+
 Scenarios are in
 test_cases.pdf
 test_cases.docx
